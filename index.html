@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VEXXA STORE</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+:root{--cyan:#00eaff;--text:#e8fcff}
+body{font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#061014,#0b1b20,#061014);color:var(--text);min-height:100vh}
+nav{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:15px 7%;display:flex;justify-content:space-between;align-items:center;background:rgba(5,15,18,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,234,255,.25)}
+.logo{font-size:24px;font-weight:900;color:var(--cyan);letter-spacing:2px}.logo span{color:white}
+.nav-links{display:flex;gap:10px;list-style:none}.nav-links button{border:none;background:transparent;color:white;padding:10px 15px;border-radius:8px;cursor:pointer;font-weight:bold;transition:.3s}.nav-links button:hover{background:var(--cyan);color:#001014}
+.menu-btn{display:none;color:white;font-size:25px;cursor:pointer}
+.page{display:none;min-height:100vh;padding:110px 7% 50px;animation:fade .35s ease}.page.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.hero{min-height:70vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.badge{display:inline-block;padding:8px 15px;border:1px solid var(--cyan);color:var(--cyan);border-radius:50px;margin-bottom:20px;font-size:13px;font-weight:bold}
+.hero h1{font-size:clamp(45px,8vw,90px);color:white;text-shadow:0 0 25px rgba(0,234,255,.4)}.hero h1 span,.section-title h2 span,.contact-box h2 span{color:var(--cyan)}
+.hero p{max-width:650px;margin:20px auto;color:#b9dce1;line-height:1.7}
+.btn{display:inline-block;border:none;padding:13px 25px;background:var(--cyan);color:#001014;border-radius:10px;font-weight:900;cursor:pointer;transition:.3s}.btn:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(0,234,255,.3)}
+.btn-outline{background:transparent;color:var(--cyan);border:1px solid var(--cyan);margin-left:8px}
+.section-title{text-align:center;margin-bottom:35px}.section-title h2{font-size:35px;color:white}.section-title p{color:#9ebdc2;margin-top:10px}
+.products{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;max-width:1100px;margin:auto}
+.product-card,.payment-card,.order-box,.about-box,.contact-box{background:linear-gradient(145deg,#102228,#091519);border:1px solid rgba(0,234,255,.2);border-radius:18px}
+.product-card{padding:25px;transition:.3s}.product-card:hover{transform:translateY(-7px);border-color:var(--cyan);box-shadow:0 15px 35px rgba(0,234,255,.12)}
+.product-number{width:40px;height:40px;display:flex;justify-content:center;align-items:center;border-radius:10px;background:rgba(0,234,255,.1);color:var(--cyan);font-weight:bold;margin-bottom:18px}
+.product-card h3{color:white;margin-bottom:10px;font-size:21px}.meaning{color:var(--cyan);font-size:13px;font-weight:bold;margin-bottom:12px}.product-card p{color:#b7d2d6;line-height:1.6;font-size:14px}
+.order-btn{margin-top:20px;width:100%;padding:12px;border:none;border-radius:9px;background:var(--cyan);color:#001014;font-weight:bold;cursor:pointer}
+.payment-container{max-width:950px;margin:auto}.payment-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.payment-card{padding:30px 20px;text-align:center;transition:.3s}.payment-card:hover{border-color:var(--cyan);transform:translateY(-5px)}.payment-icon{font-size:40px;margin-bottom:15px}.payment-card h3{color:white;margin-bottom:8px}.payment-card p{color:#9fc1c6;font-size:14px}
+.order-box{max-width:700px;margin:auto;padding:30px}.form-group{margin-bottom:18px}.form-group label{display:block;margin-bottom:7px;color:#d9f9fc;font-weight:bold}.form-group input,.form-group select,.form-group textarea{width:100%;padding:13px;border-radius:9px;border:1px solid #29444b;background:#071216;color:white;outline:none}.form-group textarea{min-height:110px;resize:vertical}.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--cyan)}.submit-btn{width:100%;padding:14px;border:none;border-radius:10px;background:var(--cyan);color:#001014;font-weight:900;cursor:pointer;font-size:15px}
+.contact-box{max-width:850px;margin:auto;padding:35px;text-align:center}.contact-icon{width:70px;height:70px;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;background:rgba(0,234,255,.1);border:1px solid var(--cyan);border-radius:18px;font-size:35px}.contact-box h2{color:white;margin-bottom:12px}.contact-box>p{max-width:650px;margin:0 auto 25px;color:#b7d2d6;line-height:1.7}.contact-card{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px;background:#071216;border:1px solid rgba(0,234,255,.15);border-radius:15px;text-align:left}.contact-info h3{color:white;margin-bottom:5px}.contact-info p{margin:0;color:#8fb1b7;font-size:13px}.contact-btn{display:inline-block;padding:12px 20px;background:var(--cyan);color:#001014;text-decoration:none;border-radius:9px;font-weight:bold;white-space:nowrap}
+.about-box{max-width:850px;margin:auto;padding:35px;text-align:center}.about-box h2{color:var(--cyan);margin-bottom:15px}.about-box p{color:#b7d2d6;line-height:1.8}
+footer{border-top:1px solid rgba(0,234,255,.15);text-align:center;padding:25px;color:#78979d;font-size:13px}footer span{color:var(--cyan)}
+@media(max-width:768px){nav{padding:14px 5%}.menu-btn{display:block}.nav-links{position:absolute;top:65px;left:0;width:100%;display:none;flex-direction:column;padding:15px;background:#071216;border-bottom:1px solid rgba(0,234,255,.2)}.nav-links.show{display:flex}.nav-links button{width:100%;text-align:left}.products,.payment-grid{grid-template-columns:1fr}.page{padding-left:5%;padding-right:5%}.btn-outline{margin-left:0;margin-top:10px}.contact-card{flex-direction:column;text-align:center}.contact-btn{width:100%;text-align:center}}
+</style>
+</head>
+<body>
+
+<nav>
+<div class="logo">VEXXA <span>STORE</span></div>
+<div class="menu-btn" onclick="toggleMenu()">☰</div>
+<ul class="nav-links" id="navLinks">
+<li><button onclick="showPage('home')">Home</button></li>
+<li><button onclick="showPage('products')">Produk</button></li>
+<li><button onclick="showPage('payment')">Pembayaran</button></li>
+<li><button onclick="showPage('order')">Order</button></li>
+<li><button onclick="showPage('contact')">Contact Admin</button></li>
+<li><button onclick="showPage('about')">Tentang</button></li>
+</ul>
+</nav>
+
+<section id="home" class="page active">
+<div class="hero">
+<div class="badge">✦ DIGITAL SERVICE STORE ✦</div>
+<h1>VEXXA <span>STORE</span></h1>
+<p>Selamat datang di VEXXA Store. Kami menyediakan berbagai layanan digital untuk kebutuhan Discord, GTA SAMP Roleplay, Character Story, Character Killed, Design Logo Server, dan layanan lainnya.</p>
+<div>
+<button class="btn" onclick="showPage('products')">Lihat Produk</button>
+<button class="btn btn-outline" onclick="showPage('order')">Order Sekarang</button>
+</div>
+</div>
+</section>
+
+<section id="products" class="page">
+<div class="section-title"><h2>Produk <span>VEXXA STORE</span></h2><p>Pilih layanan yang sesuai dengan kebutuhanmu.</p></div>
+<div class="products">
+
+<div class="product-card"><div class="product-number">01</div><h3>Developer Discord</h3><div class="meaning">💻 Jasa Pengembangan Discord</div><p>Developer Discord adalah layanan pembuatan dan pengembangan server Discord, seperti setup kategori dan channel, role, permission, bot, sistem otomatisasi, serta berbagai kebutuhan komunitas Discord.</p><button class="order-btn" onclick="orderProduct('Developer Discord')">Order Produk</button></div>
+
+<div class="product-card"><div class="product-number">02</div><h3>Jasa Pembuatan Character Story</h3><div class="meaning">📖 Cerita Latar Belakang Karakter</div><p>Character Story adalah cerita yang menjelaskan latar belakang karakter dalam GTA SAMP Roleplay, mulai dari identitas, kehidupan, keluarga, perjalanan hidup, hingga alasan karakter berada di dalam kota.</p><button class="order-btn" onclick="orderProduct('Jasa Pembuatan Character Story')">Order Produk</button></div>
+
+<div class="product-card"><div class="product-number">03</div><h3>Jasa Pembuatan Character Killed</h3><div class="meaning">☠️ Character Killed / CK</div><p>Character Killed atau CK adalah kondisi ketika sebuah karakter dalam Roleplay dinyatakan berakhir secara permanen sesuai dengan aturan server. Layanan ini membantu membuat cerita atau konsep CK yang sesuai dengan kebutuhan Roleplay.</p><button class="order-btn" onclick="orderProduct('Jasa Pembuatan Character Killed')">Order Produk</button></div>
+
+<div class="product-card"><div class="product-number">04</div><h3>Design Logo Server</h3><div class="meaning">🎨 Jasa Design Logo Server</div><p>Design Logo Server adalah jasa pembuatan logo khusus untuk server, komunitas, atau project seperti GTA SAMP, Discord, Roleplay, maupun gaming community. Logo dibuat dengan konsep dan gaya yang sesuai dengan identitas server agar terlihat profesional, unik, dan mudah dikenali.</p><button class="order-btn" onclick="orderProduct('Design Logo Server')">Order Produk</button></div>
+
+</div>
+</section>
+
+<section id="payment" class="page">
+<div class="section-title"><h2>Metode <span>Pembayaran</span></h2><p>Pilih metode pembayaran yang tersedia.</p></div>
+<div class="payment-container"><div class="payment-grid">
+<div class="payment-card"><div class="payment-icon">💙</div><h3>GoPay</h3><p>Pembayaran melalui GoPay. Hubungi admin untuk mendapatkan nomor pembayaran.</p></div>
+<div class="payment-card"><div class="payment-icon">💳</div><h3>DANA</h3><p>Pembayaran melalui DANA. Hubungi admin untuk mendapatkan nomor pembayaran.</p></div>
+<div class="payment-card"><div class="payment-icon">📱</div><h3>QRIS</h3><p>Pembayaran menggunakan QRIS. QR dapat diberikan oleh admin setelah melakukan order.</p></div>
+</div></div>
+</section>
+
+<section id="order" class="page">
+<div class="section-title"><h2>Form <span>Order</span></h2><p>Isi data berikut untuk melakukan pemesanan.</p></div>
+<div class="order-box">
+<form id="orderForm">
+<div class="form-group"><label>Nama / Username</label><input type="text" id="name" placeholder="Masukkan nama atau username" required></div>
+<div class="form-group"><label>Pilih Produk</label><select id="product" required>
+<option value="">-- Pilih Produk --</option>
+<option value="Developer Discord">Developer Discord</option>
+<option value="Jasa Pembuatan Character Story">Jasa Pembuatan Character Story</option>
+<option value="Jasa Pembuatan Character Killed">Jasa Pembuatan Character Killed</option>
+<option value="Design Logo Server">Design Logo Server</option>
+</select></div>
+<div class="form-group"><label>Metode Pembayaran</label><select id="paymentMethod" required>
+<option value="">-- Pilih Pembayaran --</option><option value="GoPay">GoPay</option><option value="DANA">DANA</option><option value="QRIS">QRIS</option>
+</select></div>
+<div class="form-group"><label>Detail Pesanan</label><textarea id="details" placeholder="Tuliskan detail pesanan kamu..." required></textarea></div>
+<button type="submit" class="submit-btn">Kirim Order ke Admin</button>
+</form>
+</div>
+</section>
+
+<section id="contact" class="page">
+<div class="section-title"><h2>Contact <span>Admin</span></h2><p>Hubungi Customer Service VEXXA STORE jika membutuhkan bantuan.</p></div>
+<div class="contact-box">
+<div class="contact-icon">💬</div>
+<h2>Customer <span>Service</span></h2>
+<p>Butuh bantuan mengenai produk, pembayaran, atau ingin menanyakan sesuatu sebelum melakukan order? Silakan langsung hubungi admin VEXXA STORE melalui WhatsApp.</p>
+<div class="contact-card">
+<div class="contact-info"><h3>📞 Admin VEXXA STORE</h3><p>Fast Response • Information • Order</p></div>
+<a href="https://wa.me/6285742530316?text=Halo%20Admin%20VEXXA%20Store%20%F0%9F%91%8B%0ASaya%20ingin%20bertanya%20tentang%20produk." target="_blank" class="contact-btn">Chat Admin</a>
+</div>
+</div>
+</section>
+
+<section id="about" class="page">
+<div class="section-title"><h2>Tentang <span>VEXXA STORE</span></h2></div>
+<div class="about-box"><h2>VEXXA STORE</h2><p>VEXXA Store merupakan layanan digital yang menyediakan berbagai kebutuhan untuk komunitas Discord dan GTA SAMP Roleplay. Kami berusaha memberikan layanan yang praktis, rapi, dan sesuai dengan kebutuhan pelanggan.</p><br><p>Untuk melakukan pemesanan atau menanyakan produk, silakan gunakan halaman Order atau hubungi Customer Service.</p></div>
+</section>
+
+<footer>© 2026 <span>VEXXA STORE</span>. All Rights Reserved.</footer>
+
+<script>
+function showPage(pageId){
+document.querySelectorAll(".page").forEach(page=>page.classList.remove("active"));
+document.getElementById(pageId).classList.add("active");
+window.scrollTo({top:0,behavior:"smooth"});
+document.getElementById("navLinks").classList.remove("show");
+}
+function toggleMenu(){document.getElementById("navLinks").classList.toggle("show")}
+function orderProduct(productName){showPage("order");document.getElementById("product").value=productName}
+document.getElementById("orderForm").addEventListener("submit",function(event){
+event.preventDefault();
+const name=document.getElementById("name").value;
+const product=document.getElementById("product").value;
+const payment=document.getElementById("paymentMethod").value;
+const details=document.getElementById("details").value;
+const adminNumber="6285742530316";
+const message=`Halo Admin VEXXA Store 👋
+
+Saya ingin melakukan order.
+
+👤 Nama/Username:
+${name}
+
+🛒 Produk:
+${product}
+
+💳 Pembayaran:
+${payment}
+
+📝 Detail Pesanan:
+${details}
+
+Mohon diproses. Terima kasih.`;
+window.open("https://wa.me/"+adminNumber+"?text="+encodeURIComponent(message),"_blank");
+});
+</script>
+</body>
+</html>
